@@ -22,78 +22,82 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Grab and move-swap select
 -- [ trouble ]
 vim.keymap.set("n", "<leader>td", "<cmd>Trouble diagnostics toggle<cr>", { desc = "toggle diagnostics" })
 vim.keymap.set(
-	"n",
-	"<leader>tr",
-	"<cmd>Trouble lsp toggle focus=false win.position=bottom<cr>",
-	{ desc = "toggle references" }
+  "n",
+  "<leader>tr",
+  "<cmd>Trouble lsp toggle focus=false win.position=bottom<cr>",
+  { desc = "toggle references" }
 )
 vim.keymap.set(
-	"n",
-	"<leader>ts",
-	"<cmd>Trouble symbols toggle win.position=right win.size=50<cr>",
-	{ desc = "toggle symbols" }
+  "n",
+  "<leader>ts",
+  "<cmd>Trouble symbols toggle win.position=right win.size=50<cr>",
+  { desc = "toggle symbols" }
 )
 vim.keymap.set("n", "<leader>tD", "<cmd>Trouble lsp_declarations toggle <cr>", { desc = "toggle symbols" })
+
+-- [ twilight ]
+
+vim.keymap.set("n", "<leader>tt", "<cmd>Twilight<cr>", { desc = "toggle twilight" })
 
 -- [ harpoon ]
 local harpoon = require("harpoon")
 harpoon:setup({
-	settings = {
-		save_on_toggle = true,
-	},
+  settings = {
+    save_on_toggle = true,
+  },
 })
 
 vim.keymap.set("n", "<leader>a", function()
-	harpoon:list():add()
+  harpoon:list():add()
 end, { desc = "add to harpoon" })
 
 vim.keymap.set("n", "<C-e>", function()
-	harpoon.ui:toggle_quick_menu(harpoon:list())
+  harpoon.ui:toggle_quick_menu(harpoon:list())
 end, { desc = "toggle harpoon menu" })
 
 vim.keymap.set("n", "<leader>1", function()
-	harpoon:list():select(1)
+  harpoon:list():select(1)
 end, { desc = "goto harpoon 1" })
 
 vim.keymap.set("n", "<leader>2", function()
-	harpoon:list():select(1)
+  harpoon:list():select(2)
 end, { desc = "goto harpoon 2" })
 
 vim.keymap.set("n", "<leader>3", function()
-	harpoon:list():select(1)
+  harpoon:list():select(3)
 end, { desc = "goto harpoon 3" })
 vim.keymap.set("n", "<leader>4", function()
-	harpoon:list():select(1)
+  harpoon:list():select(4)
 end, { desc = "goto harpoon 4" })
 
 -- [ mini files ]
 local mini = require("mini.files")
 local minifiles_toggle = function(...)
-	if not mini.close() then
-		mini.open(...)
-	end
+  if not mini.close() then
+    mini.open(...)
+  end
 end
 
 vim.keymap.set("n", "<C-m>", function()
-	minifiles_toggle(nil, false)
+  minifiles_toggle(nil, false)
 end, { desc = "open mini.files cur dir" })
 vim.keymap.set("n", "<C-k>", function()
-	minifiles_toggle(mini.get_latest_path())
+  minifiles_toggle(vim.api.nvim_buf_get_name(0), false)
 end, { desc = "open mini.files cur dir" })
 
 -- [ mini pick ]
 local pick = require("mini.pick")
 
 local search_files = function(...)
-	pick.builtin.files(...)
+  pick.builtin.files(...)
 end
 local grep_files = function(...)
-	pick.builtin.grep_live(...)
+  pick.builtin.grep_live(...)
 end
 
 vim.keymap.set("n", "<leader>sf", function()
-	search_files()
+  search_files()
 end, { desc = "search files cur dir" })
 vim.keymap.set("n", "<leader>sg", function()
-	grep_files()
+  grep_files()
 end, { desc = "grep string cur dir" })
