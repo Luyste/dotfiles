@@ -74,7 +74,7 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# User dfuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -100,7 +100,26 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
+# alias zshdf="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias df="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
+# opencode
+export PATH=/Users/jopluysterburg/.opencode/bin:$PATH
+
+# scripts
+
+dotup() {
+  # Stage tracked + new files (change to -u if you only want tracked updates)
+  df add -u
+
+  # If nothing to commit, stop cleanly
+  if df diff --cached --quiet; then
+    echo "dotup: nothing to commit"
+    return 0
+  fi
+
+  local msg="Update $(date +'%Y-%m-%d %H:%M') $(uname -s)/$(uname -m) $(hostname -s)"
+  df commit -m "$msg" && df push
+}
