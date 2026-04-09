@@ -76,3 +76,16 @@ dotup() {
   df commit -m "$msg" && df push
 }
 export PATH="$HOME/.local/bin:$PATH"
+
+# repo-finder: ctrl+g to fuzzy-find git repos and cd into them
+repo-finder-widget() {
+  local selected
+  selected=$(repo-finder)
+  if [[ -n "$selected" ]]; then
+    BUFFER="cd ${(q)selected}"
+    zle accept-line
+  fi
+  zle reset-prompt
+}
+zle -N repo-finder-widget
+bindkey '^G' repo-finder-widget
