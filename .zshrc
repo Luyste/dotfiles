@@ -28,34 +28,12 @@ alias df="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias lg='lazygit'
 alias p='pnpm'
 alias c='claude'
-alias less='less -r'
 alias ll='ls -l'
 alias gs='git status '
-alias gss='git status -s'
-alias gp='git pull'
-alias gho='git push -u origin '
-alias up='git push '
-alias upo='git push -u origin '
 alias ga='git add '
-alias gaa='git add -A'
-alias gb='git branch '
-alias gc='git commit '
 alias gcm='git commit -m '
-alias gd='git diff'
 alias gco='git checkout '
 alias gcob='git checkout -b'
-alias gk='gitk --all&'
-alias gx='gitx --all'
-alias got='git '
-alias get='git '
-alias g='git '
-alias gm='git merge '
-alias gr='git reset '
-alias gdf='git clean -f'
-alias gst='git stash'
-alias gsta= 'git stash apply'
-alias dcup= 'docker compose up'
-alias dcd= 'docker compose down'
 
 # opencode
 export PATH=/Users/jopluysterburg/.opencode/bin:$PATH
@@ -77,15 +55,19 @@ dotup() {
 }
 export PATH="$HOME/.local/bin:$PATH"
 
-# repo-finder: ctrl+g to fuzzy-find git repos and cd into them
-repo-finder-widget() {
+# quick-find: ctrl+g to fuzzy-find repos, files, or directories
+quick-find-widget() {
   local selected
-  selected=$(repo-finder)
+  selected=$(quick-find)
   if [[ -n "$selected" ]]; then
-    BUFFER="cd ${(q)selected}"
+    if [[ -d "$selected" ]]; then
+      BUFFER="cd ${(q)selected}"
+    else
+      BUFFER="${EDITOR:-vim} ${(q)selected}"
+    fi
     zle accept-line
   fi
   zle reset-prompt
 }
-zle -N repo-finder-widget
-bindkey '^G' repo-finder-widget
+zle -N quick-find-widget
+bindkey '^G' quick-find-widget
