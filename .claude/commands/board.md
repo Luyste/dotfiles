@@ -22,15 +22,12 @@ The user's input is: $ARGUMENTS
 
 ## Commands
 
-**Fetch all items:**
-```bash
-gh project item-list <project-number> --owner <owner> --format json
-```
-
-**Get issue details (for labels and sub-issue counts):**
-```bash
-gh issue view <number> --repo <owner>/<repo> --json labels,title,number
-```
+- **Fetch items for one stage**: `~/.claude-helpers/get-issues.sh --stage <stage>` (prints `#NUM - Title`)
+- **Fetch all board items with full metadata** (when you need area labels or sub-issue counts):
+  ```bash
+  gh project item-list <project-number> --owner <owner> --format json
+  ```
+- **Get issue details**: `gh issue view <number> --repo <repo> --json labels,title,number,parent`
 
 ## Display Format
 

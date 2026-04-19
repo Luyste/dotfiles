@@ -23,10 +23,19 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='nvim'
 # fi
 
+# Aliases — fuzzy-pick an issue, feed it to claude
+alias ci='claude "/implement $(~/.claude-helpers/select-issue.sh --type story --stage backlog)"'
+alias cr='claude "/refine $(~/.claude-helpers/select-issue.sh --type epic --stage backlog)"'
+alias cv='claude "/review $(~/.claude-helpers/select-issue.sh --stage ready-for-review)"'
+alias cf='claude "/fix $(~/.claude-helpers/select-issue.sh --stage needs-changes)"'
+alias cid='claude /idea'
+alias cm='~/.claude-helpers/claude-menu.sh'
+
 # Aliases
 alias df="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias lg='lazygit'
 alias p='pnpm'
+alias pnr='pnpm nx run'
 alias c='claude'
 alias ll='ls -l'
 alias gs='git status '
@@ -71,3 +80,7 @@ quick-find-widget() {
 }
 zle -N quick-find-widget
 bindkey '^G' quick-find-widget
+
+# Tab-completion for claude-story aliases
+fpath=(~/.zsh/completions $fpath)
+autoload -Uz compinit && compinit

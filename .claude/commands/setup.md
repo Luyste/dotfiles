@@ -50,15 +50,23 @@ If the field has different options, update them via GraphQL.
 
 Fetch and store all option IDs.
 
-### 4. Ask for Area Labels
+### 4. Bootstrap Labels (type / stage / area)
+
+This workflow uses a three-dimensional label taxonomy. The `labels-bootstrap.sh` helper creates them all in one go and is idempotent.
+
 Ask the user: **"What area labels do you want? These group your epics (e.g. Frontend, Backend, API, Mobile)."**
 
-Create any labels that don't already exist:
+Then run:
 ```bash
-gh label create "<Label>" --repo <owner>/<repo> --color <color> --description "<description>"
+~/.claude-helpers/labels-bootstrap.sh --areas "Frontend,Backend,API,Mobile"
 ```
 
-Use distinct colors for each label.
+This creates (skipping any that already exist):
+- **Type labels** (`type:epic`, `type:story`, `type:bug`, `type:chore`) — what kind of issue
+- **Stage labels** (`stage:backlog`, `stage:refined`, `stage:in-progress`, `stage:ready-for-review`, `stage:needs-changes`, `stage:ready-to-merge`, `stage:blocked`) — where it is in the workflow; mirrors the board Status column
+- **Area labels** (`area:<name>`) — which part of the product; one provided by the user per comma
+
+The stage labels enable fast tab-completion and fuzzy-finding via `gh issue list --label` (no GraphQL needed), while the board Status field provides the visual kanban. Helpers keep both surfaces in sync.
 
 ### 5. Detect Build Tooling
 Auto-detect from project files:
@@ -107,6 +115,8 @@ Write the config to `.claude/project.config.md`:
 
 ## Labels
 - areas: Label1, Label2, Label3
+<!-- type:* and stage:* labels are standardized across all projects — see ~/.claude-helpers/labels.sh -->
+
 
 ## Build Commands
 - install: <install command>

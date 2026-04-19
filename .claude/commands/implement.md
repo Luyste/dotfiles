@@ -37,8 +37,8 @@ digraph implement_flow {
 
 ### 1. Select Story
 - Read `.claude/project.config.md` for all project settings
-- If no issue number provided, fetch all project items with status "Refined"
-- Show them to the user, let them pick
+- If `$ARGUMENTS` contains an issue number, use it directly
+- Otherwise, run `~/.claude-helpers/get-issues.sh --type story --stage backlog`, then present the candidates using the `AskUserQuestion` tool (one option per line, format `#NUM - Title`). Proceed with the picked number
 - Fetch the full issue body (contains user story, acceptance criteria, and implementation plan with task checkboxes)
 - Identify the parent epic via the sub-issues API
 
@@ -60,7 +60,10 @@ git worktree list | grep "feat/<epic-number>"
 - Branch naming: `feat/<epic-number>-<short-epic-description>` (e.g. `feat/28-portal-application`)
 - Run project setup (install command from config) and verify baseline
 
-Then move the story to **In Progress** on the board.
+Then move the story to **In Progress**:
+```bash
+~/.claude-helpers/issue-set-stage.sh <story-number> in-progress
+```
 
 ### 3. Execute
 - Work inside the epic's worktree
@@ -71,7 +74,10 @@ Then move the story to **In Progress** on the board.
 - Wait for explicit go-ahead from the user before starting implementation
 
 ### 4. Complete
-- Once all tasks are done, move the story to **Ready for Review** on the board
+- Once all tasks are done, move the story to **Ready for Review**:
+  ```bash
+  ~/.claude-helpers/issue-set-stage.sh <story-number> ready-for-review
+  ```
 - Summarize what was done and any decisions made
 - The worktree stays alive for the next story in the epic or for review
 - When ALL stories in the epic are done, use `superpowers:finishing-a-development-branch` to handle PR creation / merge
@@ -94,15 +100,10 @@ If the story has no parent (it IS the epic, or it's standalone), use the story's
 
 ## Commands
 
-Read all IDs from `.claude/project.config.md`.
+All mechanics go through helpers — don't hand-craft `gh` or GraphQL.
 
-**List refined stories:**
-```bash
-gh project item-list <project-number> --owner <owner> --format json
-```
-
-**Set status to In Progress / Ready for Review:**
-Use GraphQL mutation `updateProjectV2ItemFieldValue` with project ID, field ID, and option IDs from config.
+- **List candidates**: `~/.claude-helpers/get-issues.sh --type story --stage backlog`
+- **Set status**: `~/.claude-helpers/issue-set-stage.sh <num> <stage>` (valid stages: `backlog`, `refined`, `in-progress`, `ready-for-review`, `needs-changes`, `ready-to-merge`, `blocked`)
 
 ## Important
 

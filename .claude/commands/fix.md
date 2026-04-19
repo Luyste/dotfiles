@@ -33,8 +33,8 @@ digraph fix_flow {
 
 ### 1. Select Story
 - Read `.claude/project.config.md` for all project settings
-- If no issue number provided, fetch all project items with status "Needs Changes"
-- Show them to the user, let them pick
+- If `$ARGUMENTS` contains an issue number, use it directly
+- Otherwise, run `~/.claude-helpers/get-issues.sh --stage needs-changes`, then present the candidates using the `AskUserQuestion` tool. Proceed with the picked number
 - Fetch the full issue body and all comments (review feedback is in comments)
 
 ### 2. Read Review Feedback
@@ -53,7 +53,7 @@ digraph fix_flow {
 - `cd` into the worktree
 
 ### 4. Fix Issues
-- Move story to **In Progress** on the board
+- Move story to **In Progress**: `~/.claude-helpers/issue-set-stage.sh <story> in-progress`
 - Wait for explicit go-ahead from the user
 - Work through issues in priority order: Critical → Important → Minor
 - Follow the reviewer's "How to fix" suggestions where provided
@@ -68,24 +68,14 @@ digraph fix_flow {
   - [x] Important: <what was fixed>
   - [x] Minor: <what was fixed / skipped with reason>
   ```
-- Move story back to **Ready for Review** on the board
+- Move story back to **Ready for Review**: `~/.claude-helpers/issue-set-stage.sh <story> ready-for-review`
 
 ## Commands
 
-Read all IDs from `.claude/project.config.md`.
-
-**Read story + comments:**
-```bash
-gh issue view <number> --repo <owner>/<repo> --comments
-```
-
-**Post fix summary:**
-```bash
-gh issue comment <number> --repo <owner>/<repo> --body "<summary>"
-```
-
-**Set status to In Progress / Ready for Review:**
-Use GraphQL mutation `updateProjectV2ItemFieldValue` with project ID, field ID, and option IDs from config.
+- **List candidates**: `~/.claude-helpers/get-issues.sh --stage needs-changes`
+- **Read story + comments**: `gh issue view <number> --repo <repo> --comments`
+- **Post fix summary**: `gh issue comment <number> --repo <repo> --body-file <path>`
+- **Change status**: `~/.claude-helpers/issue-set-stage.sh <num> <stage>`
 
 ## Important
 

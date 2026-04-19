@@ -53,7 +53,8 @@ digraph refine_flow {
 
 ### 1. Select & Understand
 - Read `.claude/project.config.md` for all project settings
-- Show Backlog items, or use the issue number provided
+- If `$ARGUMENTS` contains an issue number, use it directly
+- Otherwise, run `~/.claude-helpers/get-issues.sh --type epic --stage backlog`, then present the candidates using the `AskUserQuestion` tool. Proceed with the picked number
 - Fetch the current issue body
 - Explore relevant parts of the codebase to understand current state
 
@@ -85,36 +86,29 @@ For each story, invoke `superpowers:writing-plans` to create a detailed plan. Th
 - Be self-contained enough for a worker agent to execute without additional discussion
 
 ### 5. Create Sub-Issues & Update Board
-Once user approves the plans:
-- Create each story as a sub-issue of the epic
-- Story body contains: user story, acceptance criteria, and full implementation plan with task checkboxes
-- Add each sub-issue to the project board in **Backlog** status
-- Move the **epic** to **Refined** on the board
-- Label stories with area label
+Once user approves the plans, for each story:
 
-## Commands
+1. Write the story body to a temp file (user story + acceptance criteria + implementation plan with task checkboxes).
+2. Create the story + add to board + set Backlog status, all at once:
+   ```bash
+   ~/.claude-helpers/issue-create.sh \
+     --type story \
+     --area "<area>" \
+     --title "<story title>" \
+     --body-file "<tmpfile>" \
+     --stage backlog
+   ```
+3. Extract the issue number from the URL the helper prints, then link as a sub-issue of the epic:
+   ```bash
+   ~/.claude-helpers/issue-link-parent.sh <child-number> <epic-number>
+   ```
 
-Read owner, repo, project number, project ID, field ID, and status option IDs from `.claude/project.config.md`.
-
-**List backlog items:**
+Then move the epic to Refined:
 ```bash
-gh project item-list <project-number> --owner <owner> --format json
+~/.claude-helpers/issue-set-stage.sh <epic-number> refined
 ```
 
-**Create sub-issue:**
-```bash
-# 1. Create the child issue
-gh issue create --repo <owner>/<repo> --title "<task title>" --body "<body>" --label "<Area>"
-
-# 2. Get the child issue's node ID
-gh api '/repos/<owner>/<repo>/issues/<child_number>' --jq '.node_id'
-
-# 3. Link as sub-issue to epic
-gh api --method POST '/repos/<owner>/<repo>/issues/<epic_number>/sub_issues' -f sub_issue_id=<node_id>
-```
-
-**Set epic status to Refined:**
-Use GraphQL mutation `updateProjectV2ItemFieldValue` with project ID, field ID, and Refined option ID from config.
+The helpers keep the `stage:*` label and board Status column in sync automatically.
 
 ## Important
 
