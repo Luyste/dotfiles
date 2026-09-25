@@ -14,7 +14,7 @@ require("plugins.multicursor")
 require("plugins.completion")
 require("plugins.format")
 require("plguins.blame")
-require("plguins.lsp")
+require("plugins.lsp")
 
 if vim.g.neovide then
 	require("config.neovide")
