@@ -19,6 +19,7 @@ o.splitright = true
 o.splitbelow = true
 o.undofile = true
 o.swapfile = false
+o.fillchars = { eob = " " }
 
 vim.schedule(function()
 	o.clipboard = "unnamedplus"

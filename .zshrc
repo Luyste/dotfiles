@@ -37,15 +37,19 @@ alias lg='lazygit'
 alias p='pnpm'
 alias pnr='pnpm nx run'
 alias c='claude'
+alias comfy='(cd ~/personal/projects/ComfyUI && source venv/bin/activate && python main.py)'
 alias ll='ls -l'
 alias gs='git status '
 alias ga='git add '
 alias gcm='git commit -m '
 alias gco='git checkout '
 alias gcob='git checkout -b'
+alias gt='git tag staging-$(date +%Y.%m.%d)'
+alias n='neovide'
 
-# opencode
-export PATH=/Users/jopluysterburg/.opencode/bin:$PATH
+
+# Go
+export PATH="$PATH:$(go env GOPATH)/bin"
 
 # scripts
 
@@ -84,3 +88,8 @@ bindkey '^G' quick-find-widget
 # Tab-completion for claude-story aliases
 fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit && compinit
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+
+# stage-hero deploy tags (gts=staging, gtp=production)
+alias gts='/Users/jopluysterburg/personal/projects/stage-hero/scripts/deploy-tag.sh staging'
+alias gtp='/Users/jopluysterburg/personal/projects/stage-hero/scripts/deploy-tag.sh production'

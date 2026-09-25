@@ -7,35 +7,58 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "show_edit_predictions": false,
+  "edit_predictions": {
+    "zed": {
+      "prediction_debounce": 0,
+    },
+  },
+  "format_on_save": "on",
+  "disable_ai": false,
+  "cli_default_open_behavior": "new_window",
+  "project_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "git_panel": {
+    "dock": "left",
+  },
   "lsp": {
     "vtsls": {
       "settings": {
         "typescript": {
           "updateImportsOnFileMove": {
-            "enabled": "always"
-          }
+            "enabled": "always",
+          },
         },
         "javascript": {
           "updateImportsOnFileMove": {
-            "enabled": "always"
-          }
-        }
+            "enabled": "always",
+          },
+        },
       },
-      "enable_lsp_tasks": true
-    }
+      "enable_lsp_tasks": true,
+    },
   },
   "agent": {
+    "default_profile": "ask",
+    "dock": "right",
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-5.3-codex",
-      "enable_thinking": false,
-      "effort": "high",
+      "provider": "anthropic",
+      "model": "claude-opus-4-6",
+      "enable_thinking": true,
+      "effort": "medium",
     },
     "favorite_models": [],
     "model_parameters": [],
   },
   "icon_theme": {
-    "mode": "light",
+    "mode": "dark",
     "light": "Zed (Default)",
     "dark": "Zed (Default)",
   },
@@ -50,11 +73,13 @@
   "ui_font_size": 18,
   "ui_font_family": "IBM Plex Mono",
   "buffer_font_size": 18,
-  "buffer_font_family": "Operator Mono",
-  "buffer_font_weight": 300,
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "buffer_font_weight": 350,
+  "buffer_line_height": "comfortable",
+  "relative_line_numbers": "enabled",
   "theme": {
     "mode": "dark",
-    "light": "One Light",
-    "dark": "Catppuccin Frappé",
+    "light": "Nord Light",
+    "dark": "One Dark",
   },
 }

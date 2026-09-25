@@ -17,8 +17,8 @@ if [[ -z "$CHILD" || -z "$PARENT" ]]; then
   exit 2
 fi
 
-CHILD_NODE_ID="$(gh api "/repos/$REPO/issues/$CHILD" --jq '.node_id')"
+CHILD_DB_ID="$(gh api "/repos/$REPO/issues/$CHILD" --jq '.id')"
 gh api --method POST "/repos/$REPO/issues/$PARENT/sub_issues" \
-  -f sub_issue_id="$CHILD_NODE_ID" >/dev/null
+  -F sub_issue_id="$CHILD_DB_ID" >/dev/null
 
 echo "Linked #$CHILD as sub-issue of #$PARENT"
