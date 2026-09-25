@@ -13,7 +13,7 @@ require("plugins.picker")
 require("plugins.multicursor")
 require("plugins.completion")
 require("plugins.format")
-require("plguins.blame")
+require("plugins.blame")
 require("plugins.lsp")
 
 if vim.g.neovide then
