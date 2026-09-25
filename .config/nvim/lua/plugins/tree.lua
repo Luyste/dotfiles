@@ -28,7 +28,7 @@ local function on_attach(bufnr)
 		local node = api.tree.get_node_under_cursor()
 		local base = vim.fn.getcwd()
 		if node then
-			base = note.type == "directory" and node.absolute_path or vim.fn.fnamemodify(node.absolute_path, ":h")
+			base = node.type == "directory" and node.absolute_path or vim.fn.fnamemodify(node.absolute_path, ":h")
 		end
 
 		vim.ui.input({ prompt = "New directory: " }, function(name)
