@@ -166,10 +166,12 @@ fi
 
 info "Dotfiles"
 dotfiles_ok=true
+fresh_clone=false
 
 if [[ ! -d "$DOTFILES_DIR" ]]; then
   if git clone --bare "$DOTFILES_REPO" "$DOTFILES_DIR"; then
     ok "Cloned into $DOTFILES_DIR"
+    fresh_clone=true
   else
     fail "git clone $DOTFILES_REPO"
     dotfiles_ok=false
@@ -197,6 +199,27 @@ if $dotfiles_ok; then
       ok "Files checked out into $HOME"
     else
       fail "dotfiles checkout (run: git --git-dir=$DOTFILES_DIR --work-tree=$HOME checkout)"
+      dotfiles_ok=false
+    fi
+  fi
+
+  # Existing setup: download new commits from GitHub and update files.
+  # --ff-only refuses to overwrite local changes instead of clobbering them.
+  if $dotfiles_ok && ! $fresh_clone; then
+    branch="$(dot rev-parse --abbrev-ref HEAD 2>/dev/null || echo main)"
+    if dot fetch origin "$branch" >/dev/null 2>&1; then
+      before="$(dot rev-parse HEAD)"
+      if dot merge --ff-only FETCH_HEAD >/dev/null 2>&1; then
+        if [[ "$before" == "$(dot rev-parse HEAD)" ]]; then
+          skip "Dotfiles already up to date"
+        else
+          ok "Dotfiles updated to latest $branch"
+        fi
+      else
+        fail "Dotfiles update: local changes or unpushed commits (check with: df status)"
+      fi
+    else
+      fail "Could not fetch dotfiles from GitHub"
     fi
   fi
 
