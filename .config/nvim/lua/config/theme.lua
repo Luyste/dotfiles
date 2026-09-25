@@ -6,6 +6,7 @@ vim.pack.add({
 require("onedark").setup({
 	function_style = "italic",
 	sidebars = { "qf", "vista_kind", "terminal", "packer" },
+	hide_inactive_statusline = false,
 
 	-- Change the "hint" color to the "orange0" color, and make the "error" color bright red
 	colors = { hint = "orange0", error = "#ff0000" },
