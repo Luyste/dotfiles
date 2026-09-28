@@ -36,6 +36,7 @@ vim.lsp.enable({
 	"taplo",
 	"lua_ls",
 	"tsp_server",
+	"rust_analyzer",
 })
 
 -- Extra LSP keymaps (only active in buffers with a server attached)
