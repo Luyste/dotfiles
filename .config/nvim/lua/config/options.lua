@@ -4,7 +4,7 @@ o.number = true
 o.relativenumber = true
 o.signcolumn = "yes"
 o.cursorline = true
-o.scrolloff = 16
+o.scrolloff = 19
 o.mouse = "a"
 o.smoothscroll = true
 
@@ -22,5 +22,5 @@ o.swapfile = false
 o.fillchars = { eob = " " }
 
 vim.schedule(function()
-	o.clipboard = "unnamedplus"
+    o.clipboard = "unnamedplus"
 end)

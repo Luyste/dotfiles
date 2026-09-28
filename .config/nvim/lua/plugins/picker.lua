@@ -3,8 +3,10 @@ vim.pack.add({ "https://github.com/ibhagwan/fzf-lua" })
 local fzf = require("fzf-lua")
 
 fzf.setup({
-	"hide",
+    "hide",
 })
+
+fzf.register_ui_select()
 
 local map = vim.keymap.set
 

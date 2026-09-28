@@ -54,7 +54,7 @@ export PATH="$PATH:$(go env GOPATH)/bin"
 # scripts
 
 dotup() {
-  # Stage tracked + new files (change to -u if you only want tracked updates)
+  # Stage changes to files already in the repo; new files need an explicit `df add <path>`
   df add -u
 
   # If nothing to commit, stop cleanly
@@ -64,7 +64,8 @@ dotup() {
   fi
 
   local msg="Update $(date +'%Y-%m-%d %H:%M') $(uname -s)/$(uname -m) $(hostname -s)"
-  df commit -m "$msg" && df push
+  # Rebase onto what other machines pushed, so the push isn't rejected
+  df commit -m "$msg" && df pull --rebase --autostash && df push
 }
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -93,3 +94,14 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 # stage-hero deploy tags (gts=staging, gtp=production)
 alias gts='/Users/jopluysterburg/personal/projects/stage-hero/scripts/deploy-tag.sh staging'
 alias gtp='/Users/jopluysterburg/personal/projects/stage-hero/scripts/deploy-tag.sh production'
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+
+#switchyard tmux pi sessions
+pit() {
+  local name="pi-${${PWD:t}//./_}"
+  tmux new-session -A -s "$name" pi "$@"
+}
+
+# Machine-specific settings (work aliases, tokens): never tracked, loaded last so they win
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
