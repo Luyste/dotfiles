@@ -34,6 +34,7 @@ BREW_FORMULAE=(
   "fd:fd"
   "ripgrep:rg"
   "lazygit:lazygit"
+  "tmux:tmux"
   "gh:gh"
   "marksman:marksman"
   "taplo:taplo"
@@ -237,15 +238,23 @@ info "npm packages"
 if ! has npm; then
   fail "npm not found, skipped all npm packages"
 else
+  # With Volta managing node, `npm install -g` leaves the commands off PATH:
+  # only `volta install` puts them in ~/.volta/bin. So under Volta a package
+  # only counts as installed when its command is found.
+  if has volta; then
+    npm_install=(volta install)
+  else
+    npm_install=(npm install -g)
+  fi
   for entry in "${NPM_PACKAGES[@]}"; do
     pkg="${entry%%:*}"
     cmd="${entry#*:}"
-    if has "$cmd" || npm ls -g --depth=0 "$pkg" >/dev/null 2>&1; then
+    if has "$cmd" || { ! has volta && npm ls -g --depth=0 "$pkg" >/dev/null 2>&1; }; then
       skip "$pkg"
-    elif npm install -g "$pkg" >/dev/null 2>&1; then
+    elif "${npm_install[@]}" "$pkg" >/dev/null 2>&1; then
       ok "$pkg installed"
     else
-      fail "npm install -g $pkg"
+      fail "${npm_install[*]} $pkg"
     fi
   done
 fi

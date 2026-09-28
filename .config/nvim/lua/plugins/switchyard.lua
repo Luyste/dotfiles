@@ -1,26 +1,26 @@
 local map = vim.keymap.set
-local dev = vim.fn.expand("~/personal/projects/switchyard")
+local dev = vim.fn.expand("~/personal/projects/switchyard.nvim")
 
 if vim.uv.fs_stat(dev) then
-    vim.opt.rtp:prepend(dev)
+	vim.opt.rtp:prepend(dev)
 else
-    vim.pack.add({ "https://github.com/Luyste/switchyard" })
+	vim.pack.add({ "https://github.com/Luyste/switchyard.nvim" })
 end
 
 require("switchyard").setup({})
 
 vim.api.nvim_create_autocmd("User", {
-    pattern = "SwitchyardSwitched",
-    callback = function()
-        require("nvim-tree.api").tree.open()
-        vim.cmd.wincmd("p")
-    end,
+	pattern = "SwitchyardSwitched",
+	callback = function()
+		require("nvim-tree.api").tree.open()
+		vim.cmd.wincmd("p")
+	end,
 })
 
 local function sy(fn)
-    return function()
-        require("switchyard")[fn]()
-    end
+	return function()
+		require("switchyard")[fn]()
+	end
 end
 
 map({ "n", "t" }, "<D-Y>", sy("open_yard"), { desc = "Switchyard: open the yard" })
