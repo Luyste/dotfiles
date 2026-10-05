@@ -10,9 +10,8 @@ fzf.register_ui_select()
 
 local map = vim.keymap.set
 
-map("n", "<D-f>", fzf.files, { desc = "Find files" })
+-- Files; a prefix switches: $ buffers, @ symbols (file), # symbols (project)
+map("n", "<D-f>", fzf.global, { desc = "Find: files, $ buffers, @ symbols" })
 map("n", "<D-g>", fzf.live_grep, { desc = "Grep project" })
-map("n", "<D-b>", fzf.buffers, { desc = "Open buffers" })
 map("n", "<D-CR>", fzf.resume, { desc = "Resume last search" })
-map("n", "<D-S>", fzf.lsp_document_symbols, { desc = "Symbols in file" })
 map("n", "<D-G>", fzf.grep_cword, { desc = "Grep word under cursor" })

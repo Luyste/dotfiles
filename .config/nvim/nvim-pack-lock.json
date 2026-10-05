@@ -13,6 +13,10 @@
       "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "diffview.nvim": {
+      "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
+      "src": "https://github.com/sindrets/diffview.nvim"
+    },
     "fzf-lua": {
       "rev": "13bb178a299f7493dd64427a58e61904c4b58ecb",
       "src": "https://github.com/ibhagwan/fzf-lua"
@@ -26,6 +30,10 @@
       "src": "https://github.com/jake-stewart/multicursor.nvim",
       "version": "'1.0'"
     },
+    "neogit": {
+      "rev": "70708be9664b7fcdd010eb07bdc3ebc9311c2027",
+      "src": "https://github.com/neogitorg/neogit"
+    },
     "nvim-lspconfig": {
       "rev": "046b1a797af1effe8e0474b9af9657a3761ec58a",
       "src": "https://github.com/neovim/nvim-lspconfig"
@@ -37,6 +45,10 @@
     "nvim-web-devicons": {
       "rev": "58447c1fca354bbf184425e4a8d01deecbd6f3c4",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "tiny-inline-diagnostic.nvim": {
+      "rev": "6264451f14119d63a52580e5198d6baf8518b0b2",
+      "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "vague": {
       "rev": "f9060fdaf7b20f68575d6f8214da6f1cf0c72825",

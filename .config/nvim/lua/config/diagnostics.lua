@@ -1,5 +1,5 @@
 vim.diagnostic.config({
-	virtual_text = { spacing = 2, prefix = "\u{25cf}" }, -- inline messages
+	virtual_text = false, -- tiny-inline-diagnostic draws inline messages
 	severity_sort = true,
 	update_in_insert = false,
 	float = { source = true },

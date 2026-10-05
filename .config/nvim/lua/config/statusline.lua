@@ -117,14 +117,6 @@ function _G.Statusline()
 
     s = s .. "%=" -- everything after this is right-aligned
 
-    -- Following the agent's edits (cheap boolean, safe without switchyard)
-    local ok, following = pcall(function()
-        return require("switchyard").following_edits()
-    end)
-    if ok and following then
-        s = s .. "%#StlBadgeAGENT# FOLLOW %* "
-    end
-
     -- A prompt draft waiting in the (hidden) prompt builder
     local ok_draft, draft = pcall(function()
         return require("switchyard").draft_status()
