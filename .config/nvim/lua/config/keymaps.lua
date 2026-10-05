@@ -3,6 +3,10 @@ local map = vim.keymap.set
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
 
+-- Macro recording on Q instead of q, so a stray q doesn't start recording
+map("n", "q", "<nop>")
+map("n", "Q", "q", { desc = "Record macro" })
+
 
 -- Zoom: saved to a file so it survives restarts
 local scale_file = vim.fn.stdpath("data") .. "/neovide_scale"
