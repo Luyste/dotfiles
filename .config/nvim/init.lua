@@ -26,6 +26,7 @@ load("plugins.diagnostics")
 load("plugins.switchyard")
 load("plugins.diffview")
 load("plugins.neogit")
+load("plugins.harpoon")
 
 if vim.g.neovide then
 	load("config.neovide")
