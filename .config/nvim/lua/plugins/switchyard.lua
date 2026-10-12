@@ -9,7 +9,10 @@ else
 end
 
 require("switchyard").setup({
-	projects = { pinned = { "~/.config/nvim" } }, -- not a repo of its own (bare dotfiles)
+	viewer = {
+		layout = "float", -- the agent floats on the right instead of a split
+		bar = true, -- viewer closed: `● agent  working|idle` bottom right, click to open
+	},
 })
 
 vim.api.nvim_create_autocmd("User", {
@@ -28,7 +31,7 @@ local function sy(fn)
 	end
 end
 
--- The yard: & worktrees, * agents, % projects
+-- The yard: 1 worktrees, 2 agents (Tab switches)
 map({ "n", "t" }, "<D-y>", sy("open_yard"), { desc = "Switchyard: the yard" })
 map({ "n", "t" }, "<D-j>", sy("toggle_view"), { desc = "Switchyard: toggle agent view" })
 map({ "n", "t" }, "<D-J>", sy("focus_view"), { desc = "Switchyard: jump between viewer and editor" })
