@@ -40,7 +40,6 @@
       "space t d": "diagnostics::Deploy",
       "space s f": "file_finder::Toggle",
       "space s p": "pane::DeploySearch",
-      "space space": "tab_switcher::Toggle",
       "space s s": "outline::Toggle",
       "space s shift-s": "project_symbols::Toggle",
       "space g D": "editor::GoToDefinitionSplit",
