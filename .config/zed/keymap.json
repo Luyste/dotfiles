@@ -1,5 +1,36 @@
 [
   {
+    // Like nvim: switchyard keys (agents run in tmux, see tasks.json), tree, theme
+    "context": "Workspace",
+    "bindings": {
+      "cmd-j": "workspace::ToggleRightDock", // was cmd-r
+      "cmd-r": null,
+      "cmd-shift-j": "terminal_panel::ToggleFocus",
+      "cmd-shift-h": ["task::Spawn", { "task_name": "agent: attach" }],
+      "cmd-shift-d": ["task::Spawn", { "task_name": "agent: fork to new worktree" }],
+      "cmd-e": "workspace::ToggleLeftDock",
+      "cmd-t": "theme_selector::Toggle",
+      "cmd-y": "task::Spawn", // the task picker: the closest thing to the yard
+      // fzf-lua keys
+      "cmd-f": "file_finder::Toggle",
+      "cmd-g": "pane::DeploySearch",
+      "cmd-shift-g": "pane::DeploySearch", // the word under the cursor: seed_search_query_from_cursor
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-e": "workspace::ToggleLeftDock", // the Workspace one loses to Zed's Editor cmd-e (use selection for find)
+      "cmd-l": ["task::Spawn", { "task_name": "agent: ask about selection" }],
+      "cmd-shift-l": ["task::Spawn", { "task_name": "agent: send selection" }],
+      // Again here: Zed's own cmd-f/cmd-g (buffer search, next match) win over Workspace
+      "cmd-f": "file_finder::Toggle",
+      "cmd-g": "pane::DeploySearch",
+      "cmd-shift-g": "pane::DeploySearch",
+      "cmd-y": "task::Spawn", // over Zed's git::StageAndNext
+    },
+  },
+  {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
       "shift-k": "editor::Hover",
@@ -9,6 +40,7 @@
       "space s p": "pane::DeploySearch",
       "space space": "tab_switcher::Toggle",
       "space s s": "outline::Toggle",
+      "space s shift-s": "project_symbols::Toggle",
       "space g D": "editor::GoToDefinitionSplit",
       "ctrl-/": "editor::ToggleComments",
       "space s r": "editor::FindAllReferences",
@@ -108,6 +140,8 @@
       "t": "project_panel::OpenPermanent",
       "v": "project_panel::OpenPermanent",
       "p": "project_panel::Open",
+      "m": "project_panel::OpenSplitHorizontal",
+      "n": "project_panel::OpenSplitVertical",
       "x": "project_panel::RevealInFileManager",
       "] c": "project_panel::SelectNextGitEntry",
       "[ c": "project_panel::SelectPrevGitEntry",

@@ -18,6 +18,12 @@
   "cli_default_open_behavior": "new_window",
   "project_panel": {
     "dock": "left",
+    "hide_gitignore": false,
+    "default_width": 260, // px
+  },
+  // The agent terminal (tasks.json) opens on the right, like switchyard's viewer
+  "terminal": {
+    "dock": "right",
   },
   "outline_panel": {
     "dock": "left",
@@ -73,13 +79,31 @@
   "ui_font_size": 18,
   "ui_font_family": "IBM Plex Mono",
   "buffer_font_size": 18,
-  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "buffer_font_family": "IBM Plex Mono",
   "buffer_font_weight": 350,
   "buffer_line_height": "comfortable",
   "relative_line_numbers": "enabled",
+  // nvim-like: no tabs or toolbar above the editor, the file in the status bar
+  "tab_bar": {
+    "show": false,
+  },
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false,
+    "selections_menu": false,
+  },
+  "status_bar": {
+    "show_active_file": true,
+    "cursor_position_button": true,
+  },
+  "title_bar": {
+    "show_branch_name": true,
+    "show_project_items": true,
+  },
+  "seed_search_query_from_cursor": "always",
   "theme": {
     "mode": "dark",
-    "light": "Nord Light",
-    "dark": "One Dark",
+    "light": "Vague Light",
+    "dark": "Vague Dark Deep",
   },
 }

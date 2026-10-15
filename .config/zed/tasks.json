@@ -1,0 +1,50 @@
+// Agents in tmux, like switchyard.nvim: see agent.sh
+[
+  {
+    "label": "agent: attach",
+    "command": "~/.config/zed/agent.sh",
+    "args": ["attach", "$ZED_WORKTREE_ROOT"],
+    "reveal": "always",
+    "show_command": false,
+    "show_summary": false
+  },
+  {
+    "label": "agent: attach (new claude)",
+    "command": "~/.config/zed/agent.sh",
+    "args": ["attach", "$ZED_WORKTREE_ROOT", "claude"],
+    "reveal": "always",
+    "show_command": false,
+    "show_summary": false
+  },
+  {
+    "label": "agent: send selection",
+    "command": "~/.config/zed/agent.sh",
+    "args": ["send", "$ZED_WORKTREE_ROOT"],
+    "env": {
+      "SY_FILE": "${ZED_RELATIVE_FILE:}",
+      "SY_ROW": "${ZED_ROW:}",
+      "SY_TEXT": "${ZED_SELECTED_TEXT:}"
+    },
+    "reveal": "never",
+    "hide": "always"
+  },
+  {
+    "label": "agent: ask about selection",
+    "command": "~/.config/zed/agent.sh",
+    "args": ["ask", "$ZED_WORKTREE_ROOT"],
+    "env": {
+      "SY_FILE": "${ZED_RELATIVE_FILE:}",
+      "SY_ROW": "${ZED_ROW:}",
+      "SY_TEXT": "${ZED_SELECTED_TEXT:}"
+    },
+    "reveal": "never",
+    "hide": "always"
+  },
+  {
+    "label": "agent: fork to new worktree",
+    "command": "~/.config/zed/agent.sh",
+    "args": ["fork", "$ZED_WORKTREE_ROOT"],
+    "reveal": "never",
+    "hide": "on_success"
+  }
+]
