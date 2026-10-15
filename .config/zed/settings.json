@@ -53,7 +53,7 @@
   },
   "agent": {
     "default_profile": "ask",
-    "dock": "right",
+    "dock": "bottom", // the right dock is the terminal only, so cmd-j always shows it
     "default_model": {
       "provider": "anthropic",
       "model": "claude-opus-4-6",
