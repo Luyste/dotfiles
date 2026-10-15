@@ -95,6 +95,7 @@ require("nvim-tree").setup({
 	sync_root_with_cwd = true, -- the tree follows :cd (and switchyard switches)
 	update_focused_file = { enable = true },
 	hijack_directories = { enable = false },
+	filters = { git_ignored = false }, -- show gitignored files
 })
 
 -- Started with a folder (neovide .): open the tree as a sidebar instead

@@ -24,3 +24,7 @@ o.fillchars = { eob = " " }
 vim.schedule(function()
     o.clipboard = "unnamedplus"
 end)
+
+o.wrap = true
+o.linebreak = true
+o.breakindent = true

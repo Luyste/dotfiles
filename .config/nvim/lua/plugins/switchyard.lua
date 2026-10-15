@@ -38,5 +38,5 @@ map({ "n", "t" }, "<D-J>", sy("focus_view"), { desc = "Switchyard: jump between 
 map("n", "<D-O>", sy("open_external"), { desc = "Switchyard: agent in external terminal" })
 map({ "n", "t" }, "<D-H>", sy("link_here"), { desc = "Switchyard: link an agent in this worktree" })
 map({ "n", "x" }, "<D-l>", sy("prompt"), { desc = "Switchyard: prompt builder (+ selection)" })
-map("n", "<D-L>", sy("prompt_line"), { desc = "Switchyard: prompt with this line + diagnostics" })
+map({ "n", "x" }, "<D-L>", sy("prompt_line"), { desc = "Switchyard: prompt with this line/selection + diagnostics" })
 map({ "n", "x" }, "<D-D>", sy("dispatch"), { desc = "Switchyard: dispatch a task to a new worktree" })
