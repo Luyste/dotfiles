@@ -10,6 +10,7 @@
       "cmd-shift-d": ["task::Spawn", { "task_name": "agent: fork to new worktree" }],
       "cmd-e": "workspace::ToggleLeftDock",
       "cmd-t": "theme_selector::Toggle",
+      "cmd-b": "tab_switcher::ToggleAll", // open buffers, all panes (was the left dock: cmd-e)
       "cmd-y": "task::Spawn", // the task picker: the closest thing to the yard
       // fzf-lua keys
       "cmd-f": "file_finder::Toggle",
@@ -27,6 +28,7 @@
       "cmd-f": "file_finder::Toggle",
       "cmd-g": "pane::DeploySearch",
       "cmd-shift-g": "pane::DeploySearch",
+      "cmd-b": "tab_switcher::ToggleAll",
       "cmd-y": "task::Spawn", // over Zed's git::StageAndNext
     },
   },

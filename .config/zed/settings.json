@@ -89,7 +89,7 @@
   },
   "toolbar": {
     "breadcrumbs": false,
-    "quick_actions": false,
+    "quick_actions": true, // markdown preview, search, inline assist
     "selections_menu": false,
   },
   "status_bar": {
