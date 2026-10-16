@@ -83,7 +83,7 @@
     },
   },
   {
-    "context": "ProjectPanel || Terminal || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView",
+    "context": "ProjectPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView",
     "bindings": {
       // window related commands (ctrl-w X)
       // defaults
@@ -136,7 +136,6 @@
       "ctrl-w ctrl-o": "workspace::CloseInactiveTabsAndPanes",
       "ctrl-w n": "workspace::NewFileSplitHorizontal",
       "ctrl-w ctrl-n": "workspace::NewFileSplitHorizontal",
-      "space s p": "pane::DeploySearch",
     },
   },
   {
