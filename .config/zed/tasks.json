@@ -1,6 +1,14 @@
 // Agents in tmux, like switchyard.nvim: see agent.sh
 [
   {
+    "label": "lazygit",
+    "command": "lazygit",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "hide": "always",
+    "show_command": false,
+    "show_summary": false
+  },
+  {
     "label": "agent: attach",
     "command": "~/.config/zed/agent.sh",
     "args": ["attach", "$ZED_WORKTREE_ROOT"],

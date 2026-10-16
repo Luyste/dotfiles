@@ -27,12 +27,15 @@
   },
   "outline_panel": {
     "dock": "left",
+    "button": false, // the left dock is the file tree only, so cmd-e always shows it
   },
   "collaboration_panel": {
     "dock": "left",
+    "button": false, // the left dock is the file tree only, so cmd-e always shows it
   },
   "git_panel": {
     "dock": "left",
+    "button": false, // the left dock is the file tree only, so cmd-e always shows it
   },
   "lsp": {
     "vtsls": {
@@ -66,7 +69,7 @@
   "icon_theme": {
     "mode": "dark",
     "light": "Zed (Default)",
-    "dark": "Zed (Default)",
+    "dark": "Colored Zed Icons Theme Light",
   },
   "telemetry": {
     "diagnostics": false,
@@ -89,7 +92,7 @@
   },
   "toolbar": {
     "breadcrumbs": false,
-    "quick_actions": true, // markdown preview, search, inline assist
+    "quick_actions": false,
     "selections_menu": false,
   },
   "status_bar": {

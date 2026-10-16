@@ -1,13 +1,11 @@
 [
   {
-    // Like nvim: switchyard keys (agents run in tmux, see tasks.json), tree, theme
+    // Like nvim: tree, terminal, theme, pickers; agents through the task picker (cmd-y, tasks.json)
     "context": "Workspace",
     "bindings": {
       "cmd-j": "workspace::ToggleRightDock", // was cmd-r
       "cmd-r": null,
       "cmd-shift-j": "terminal_panel::ToggleFocus",
-      "cmd-shift-h": ["task::Spawn", { "task_name": "agent: attach" }],
-      "cmd-shift-d": ["task::Spawn", { "task_name": "agent: fork to new worktree" }],
       "cmd-e": "workspace::ToggleLeftDock",
       "cmd-t": "theme_selector::Toggle",
       "cmd-b": "tab_switcher::ToggleAll", // open buffers, all panes (was the left dock: cmd-e)
@@ -33,6 +31,26 @@
     },
   },
   {
+    // Our keys again over Zed's defaults in these contexts, which beat Workspace:
+    // ProjectPanel cmd-backspace trashes files without asking,
+    // Pane cmd-f/cmd-g are project search keys.
+    // Editor (insert mode) and Terminal keep their own cmd-backspace: delete/clear the line.
+    "context": "Pane || ProjectPanel || ProjectSearchBar || ProjectSearchView",
+    "bindings": {
+      "cmd-shift-j": "terminal_panel::ToggleFocus",
+      "cmd-f": "file_finder::Toggle",
+      "cmd-g": "pane::DeploySearch",
+      "cmd-shift-g": "pane::DeploySearch",
+      "cmd-backspace": ["task::Spawn", { "task_name": "lazygit", "reveal_target": "center" }],
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-f": "file_finder::Toggle", // over terminal search
+    },
+  },
+  {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
       "shift-k": "editor::Hover",
@@ -42,6 +60,9 @@
       "space s p": "pane::DeploySearch",
       "space s s": "outline::Toggle",
       "space s shift-s": "project_symbols::Toggle",
+      "space g b": "editor::ToggleGitBlameInline",
+      "space g shift-b": "editor::ToggleGitBlame",
+      "cmd-backspace": ["task::Spawn", { "task_name": "lazygit", "reveal_target": "center" }],
       "space g D": "editor::GoToDefinitionSplit",
       "ctrl-/": "editor::ToggleComments",
       "space s r": "editor::FindAllReferences",
