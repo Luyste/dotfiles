@@ -37,18 +37,6 @@
     "hide": "always"
   },
   {
-    "label": "agent: ask about selection",
-    "command": "~/.config/zed/agent.sh",
-    "args": ["ask", "$ZED_WORKTREE_ROOT"],
-    "env": {
-      "SY_FILE": "${ZED_RELATIVE_FILE:}",
-      "SY_ROW": "${ZED_ROW:}",
-      "SY_TEXT": "${ZED_SELECTED_TEXT:}"
-    },
-    "reveal": "never",
-    "hide": "always"
-  },
-  {
     "label": "agent: fork to new worktree",
     "command": "~/.config/zed/agent.sh",
     "args": ["fork", "$ZED_WORKTREE_ROOT"],

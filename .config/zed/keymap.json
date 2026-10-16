@@ -20,7 +20,6 @@
     "context": "Editor",
     "bindings": {
       "cmd-e": "workspace::ToggleLeftDock", // the Workspace one loses to Zed's Editor cmd-e (use selection for find)
-      "cmd-l": ["task::Spawn", { "task_name": "agent: ask about selection" }],
       "cmd-shift-l": ["task::Spawn", { "task_name": "agent: send selection" }],
       // Again here: Zed's own cmd-f/cmd-g (buffer search, next match) win over Workspace
       "cmd-f": "file_finder::Toggle",

@@ -4,10 +4,9 @@
 #
 #   agent.sh attach <dir> [agent]   attach to the agent in <dir>, or start one (default: pi)
 #   agent.sh send <dir>             paste the selection as context, finish the prompt in the agent
-#   agent.sh ask <dir>              ask for a prompt, send it with the selection
 #   agent.sh fork <dir>             fork the agent in <dir> into a new worktree, open it in Zed
 #
-# send/ask read the selection from $SY_FILE, $SY_ROW and $SY_TEXT (set by the task).
+# send reads the selection from $SY_FILE, $SY_ROW and $SY_TEXT (set by the task).
 set -u
 
 die() {
@@ -86,16 +85,10 @@ attach)
 	exec tmux attach-session -t "=$session"
 	;;
 
-send | ask)
+send)
 	found=$(agent_in "$dir") || die "no agent running in ${dir##*/}"
 	read -r pane _ <<<"$found"
-	if [ "$cmd" = send ]; then
-		paste "$pane" "$(context)"
-	else
-		prompt=$(ask "Prompt for the agent:")
-		[ -n "$prompt" ] || exit 0
-		paste "$pane" "$prompt"$'\n\n'"$(context)" && sleep 0.05 && tmux send-keys -t "$pane" Enter
-	fi
+	paste "$pane" "$(context)"
 	;;
 
 fork)
